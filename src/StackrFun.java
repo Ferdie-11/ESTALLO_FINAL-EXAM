@@ -2,6 +2,8 @@ import java.util.Stack;
 
 public class StackrFun {
     public static void main(String[] args) {
+        Stack<String> creatureStack = new Stack<>();
+
         // Fixed input data for creatures and their power levels
         String[] cNames = {"Dragon", "Griffin", "Unicorn", "Phoenix", "Centaur"};
         int[] powerLevel = {95, 88, 78, 92, 85};
@@ -21,7 +23,7 @@ public class StackrFun {
         printData(cNames, selectionSortedPower);
 
         // Use bubble sorted data to push creatures onto a stack
-        Stack<String> creatureStack = new Stack<>();
+     
         for (int i = 0; i < cNames.length; i++) {
             creatureStack.push(cNames[i] + " has a power level of " + bubbleSortedPower[i]);
         }
