@@ -1,42 +1,45 @@
 import java.util.Stack;
 
 public class StackrFun {
-    public static void main(String[] args) throws Exception {
-    
+    public static void main(String[] args) {
+        // Fixed input data for creatures and their power levels
+        String[] cNames = {"Dragon", "Griffin", "Unicorn", "Phoenix", "Centaur"};
+        int[] powerLevel = {95, 88, 78, 92, 85};
+        
+        // Display original data
+        System.out.println("\nOriginal Data:");
+        printData(cNames, powerLevel);
+
+        // Sort power levels in descending order using Bubble Sort and display
+        int[] bubbleSortedPower = bubbleSort(powerLevel.clone());
+        System.out.println("\nBubble Sort (Descending Order of Power Levels):");
+        printData(cNames, bubbleSortedPower);
+
+        // Sort power levels in ascending order using Selection Sort and display
+        int[] selectionSortedPower = selectionSort(powerLevel.clone());
+        System.out.println("\nSelection Sort (Ascending Order of Power Levels):");
+        printData(cNames, selectionSortedPower);
+
+        // Use bubble sorted data to push creatures onto a stack
         Stack<String> creatureStack = new Stack<>();
-        String[] cNames = {"Dragon", "Griffin", "Unicorn", "Phoenix", "Centaur"}; //String for stack creatures
-        int[] powerLevel = {95, 88, 78, 92, 85}; // Array of power levels corresponding to the creatures
-
-        // Sort the power levels using Bubble Sort and Selection Sort
-        int[] bubbleSorted = bubbleSort(powerLevel.clone());
-        int[] selectionSorted = selectionSort(powerLevel.clone());
-
-        // Print the sorted power levels
-        System.out.println("Bubble Sort:Descending by Power Levels:");
-        printArray(bubbleSorted);
-        System.out.println("Selection Sort:Ascending by Power Levels:");
-        printArray(selectionSorted);
-
-         // Push each creature name onto the stack
-         for (int i = 0; i < cNames.length; i++) {
-            creatureStack.push(cNames[i]);
-            
+        for (int i = 0; i < cNames.length; i++) {
+            creatureStack.push(cNames[i] + " has a power level of " + bubbleSortedPower[i]);
         }
-        //Pop each Creature Name
+
+        // Pop and display each creature's details from the stack
+        System.out.println("\nPopped Creatures (Descending Order of Power Levels):");
         while (!creatureStack.isEmpty()) {
-           System.out.println("Popped: " + creatureStack.pop());
+            System.out.println(creatureStack.pop());
         }
-
     }
 
     // Bubble Sort algorithm to sort the array in descending order
     public static int[] bubbleSort(int[] arr) {
         int n = arr.length;
-        int i, j, temp;
-        for (i = 0; i < n - 1; i++) {
-            for (j = 0; j < n - 1 - i; j++) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
                 if (arr[j] < arr[j + 1]) {
-                    temp = arr[j];
+                    int temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
@@ -48,26 +51,24 @@ public class StackrFun {
     // Selection Sort algorithm to sort the array in ascending order
     public static int[] selectionSort(int[] arr) {
         int n = arr.length;
-        int i, j, temp, maxIdx;
-        for (i = 0; i < n - 1; i++) {
-            maxIdx = i;
-            for (j = i + 1; j < n; j++) {
-                if (arr[j] < arr[maxIdx]) {
-                    maxIdx = j;
+        for (int i = 0; i < n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIdx]) {
+                    minIdx = j;
                 }
             }
-            temp = arr[maxIdx];
-            arr[maxIdx] = arr[i];
+            int temp = arr[minIdx];
+            arr[minIdx] = arr[i];
             arr[i] = temp;
         }
         return arr;
     }
 
-    // Method to print the elements of an array
-    public static void printArray(int[] arr) {
-        for (int num : arr) {
-            System.out.print(num + " ");
+    // Method to print the elements of an array with their corresponding names
+    public static void printData(String[] names, int[] powerLevels) {
+        for (int i = 0; i < names.length; i++) {
+            System.out.println(names[i] + " has a power level of " + powerLevels[i]);
         }
-        System.out.println();
     }
 }
