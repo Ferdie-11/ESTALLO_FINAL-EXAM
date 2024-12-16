@@ -8,6 +8,7 @@ public class StackrFun {
         String[] cNames = {"Dragon", "Griffin", "Unicorn", "Phoenix", "Centaur"};
         int[] powerLevel = {95, 88, 78, 92, 85};
         
+        System.out.println("\nESTALLO FINAL EXAM");
         // Display original data
         System.out.println("\nOriginal Data:");
         printData(cNames, powerLevel);
